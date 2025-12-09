@@ -3,14 +3,19 @@
 
 class Player;
 
-class Enemy {
+#include "entity.h"
+
+class Enemy:public Entity
+{
     private:
         int x, y;
     public:
         Enemy(int startX, int startY);
 
-        int getX() const;
-        int getY() const;
+        int getX() const override;
+        int getY() const override;
+        void print() const override;
+        void update() override;
 
         void move(int dx, int dy);
 

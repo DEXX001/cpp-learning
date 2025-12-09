@@ -17,6 +17,11 @@ int Player::getX() const { return x; }
 int Player::getY() const { return y; }
 int Player::getSpeed() const { return speed; }
 
+void Player::update()
+{
+    x += speed;
+}
+
 void Player::setSpeed(int s)
 {
     if (s < 0)

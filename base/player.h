@@ -1,7 +1,11 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 
-class Player{
+#include <iostream>
+#include "entity.h"
+
+class Player : public Entity
+{
     private:
         int x, y, speed;
     
@@ -10,14 +14,15 @@ class Player{
 
         void moove(int dx, int dy);
 
-        int getX() const;
-        int getY() const;
+        void update() override;
+        int getX() const override;
+        int getY() const override;
         int getSpeed() const;
 
         void setSpeed(int s);
         void moveTo(int newX, int newY);
         void accelerate(int amount);
-        void print() const; 
+        void print() const override;
 };
 
 

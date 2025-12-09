@@ -1,27 +1,43 @@
 #include <iostream>
+#include <vector>
 #include "player.h"
 #include "enemy.h"
 
 int main()
 {
-    Player p(10, 5, 3);
-    Enemy e(12, 7);
+    std::vector<Entity*> entities;
 
-    p.print();
-    std::cout << "Enemy at : (" << e.getX() << ", " << e.getY() << ")" << std::endl;
+    entities.push_back(new Player(10, 5, 2));
+    entities.push_back(new Enemy(50, 50));
 
-    int dist = e.distanceTo(p);
-    std::cout << "Distance Enemy -> Player = " << dist << std::endl;
-
-    if (e.isCollidingWith(p))
-        std::cout << "Collision !\n";
-    else
-        std::cout << "Pas de collision.\n";
+    std::cout << "=== ÉTAT INITIAL ===" << std::endl;
+    for (Entity* e : entities)
+        e->print();
     
-    p.moove(1, 0);
-    p.print();
+    std::cout << "\n=== UPDATE GLOBAL ===" << std::endl;
+    for (Entity* e : entities)
+        e->update();
 
-    std::cout << "Nouvelle distance = " << e.distanceTo(p) << std::endl;
+    std::cout << "\n=== ÉTAT APRÈS UPDATE ===" << std::endl;
+    for (Entity* e : entities)
+        e->print();
+
+    Player* p = dynamic_cast<Player*>(entities[0]);
+    Enemy* e = dynamic_cast<Enemy*>(entities[1]);
+
+    if (p && e)
+    {
+        std::cout << "\nDistance Player -> Enemy : "
+                  << e->distanceTo(*p) << std::endl;
+
+        if (e->isCollidingWith(*p))
+            std::cout << "Collision detectee !" << std::endl;
+        else
+            std::cout << "Aucune collision." << std::endl;
+    }
+
+    for (Entity* e : entities)
+        delete(e);
 
     return EXIT_SUCCESS;
 

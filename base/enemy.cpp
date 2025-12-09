@@ -1,15 +1,28 @@
 #include "enemy.h"
 #include "player.h"
+#include "entity.h"
 #include <iostream>
 
 Enemy::Enemy(int startX, int startY)
         : x(startX), y(startY)
 {
-    std::cout << "Constructeur Player appelé." << std::endl;
+    std::cout << "Enemy créé." << std::endl;
 }
 
 int Enemy::getX() const { return x; }
 int Enemy::getY() const { return y; }
+
+void Enemy::update()
+{
+    y += 1;
+}
+
+void Enemy::print() const
+{
+    std::cout << "Enemy(x=" << x
+              << ", y=" << y
+              << ")" << std::endl;
+}
 
 void Enemy::move(int dx, int dy)
 {
